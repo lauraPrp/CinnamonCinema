@@ -13,7 +13,7 @@ public class CinnamonCinemaTest {
 
        int result = cinemaCinnamon.book(1);
 
-        assertEquals(14,1+result);
+        assertEquals(14,result);
     }
 
 
