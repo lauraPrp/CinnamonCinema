@@ -5,7 +5,7 @@ public class Cinema {
     int availableSeats;
 
   public int book(int seatToBook){
-      return 0;
+      return maxSeats-seatToBook;
 
   }
 
