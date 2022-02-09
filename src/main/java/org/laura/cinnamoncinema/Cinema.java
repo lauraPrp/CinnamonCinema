@@ -5,7 +5,10 @@ public class Cinema {
     int availableSeats;
 
   public int book(int seatToBook){
-      return maxSeats-seatToBook;
+if(seatToBook>3)
+    throw new UnsupportedOperationException("You can book max 3 seats");
+
+    return maxSeats-seatToBook;
 
   }
 
