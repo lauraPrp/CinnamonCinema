@@ -12,7 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CinnamonCinemaTest {
     public Cinema cinemaCinnamon;
-    public Seat[][] seats;
+    Seat[][] seats;
+    ArrayList<Seat> seatsToBook;
 
     @BeforeEach
     public void setUpCinemaManager() {
@@ -43,7 +44,6 @@ public class CinnamonCinemaTest {
                 assertFalse(currentSeat.isBooked());
             }
         }
-
     }
 
     @Test
@@ -56,11 +56,21 @@ public class CinnamonCinemaTest {
         assertEquals(0, bookedSeats.get(0).getSeatNumber());
     }
 
+    @Disabled
+    public void generateRandomNumberTest() {
+        int generatedNumber = cinemaCinnamon.generateRandomBookingsNumber();
+
+        assertTrue(generatedNumber >= 1 && generatedNumber <=3);
+    }
+
     @Test
     public void generateRandomBookingTest() {
-        int generatedNumber= cinemaCinnamon.generateRandomBookingsNumber();
 
-        assertTrue(generatedNumber>=1 && generatedNumber<+3);
+        //act
+        int numberSeatsToBook = cinemaCinnamon.generateRandomBookingsNumber();
+        seatsToBook = cinemaCinnamon.book(numberSeatsToBook);
+        assertEquals(numberSeatsToBook,seatsToBook.size());
+
     }
 
 }
