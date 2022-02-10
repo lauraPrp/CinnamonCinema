@@ -30,5 +30,11 @@ public void setUpCinemaManager(){
         assertThrows(UnsupportedOperationException.class, () -> cinemaCinnamon.book(15));
     }
 
+    @Test
+    public void assignCorrectSeatFirstBookingRowANumberOne(){
+        Seat bookedSeat =new Seat();
+        assertEquals('a',bookedSeat.getRow());
+        assertEquals('1',bookedSeat.getNumber());
+    }
 
 }
