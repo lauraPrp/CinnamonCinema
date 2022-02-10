@@ -29,7 +29,7 @@ public class Cinema {
                 emptyTheatre[i][j] = currentSeat;
             }
         }
-        //this.emptyTheatre = emptyTheatre;
+
     }
 
 
@@ -67,6 +67,11 @@ public class Cinema {
         }
         return avalableSeats;
 
+    }
+
+    public int generateRandomBookingsNumber() {
+
+        return 0;
     }
 
 
