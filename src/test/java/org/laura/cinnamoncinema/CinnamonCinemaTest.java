@@ -56,7 +56,7 @@ public class CinnamonCinemaTest {
         assertEquals(0, bookedSeats.get(0).getSeatNumber());
     }
 
-    @Disabled
+    @Test
     public void generateRandomNumberTest() {
         int generatedNumber = cinemaCinnamon.generateRandomBookingsNumber();
 
@@ -72,5 +72,13 @@ public class CinnamonCinemaTest {
         assertEquals(numberSeatsToBook,seatsToBook.size());
 
     }
+    @Test
+    public void generateRandomBookingTestUntilTheatreisFull() {
+        for(int i=0;i<5;i++) {
+            int numberSeatsToBook = 3;
+            seatsToBook = cinemaCinnamon.book(numberSeatsToBook);
+            assertEquals(numberSeatsToBook, seatsToBook.size());
+        }
 
+    }
 }

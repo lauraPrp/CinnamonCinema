@@ -1,13 +1,12 @@
 package org.laura.cinnamoncinema;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Cinema {
 
-    private final Dictionary<Integer,Character> cinemaRows;
-    private final int allSeats = 15;
+    private final Map<Integer,Character> cinemaRows;
+
 
     private final int COL_NUM = 5;
 
@@ -18,7 +17,6 @@ public class Cinema {
         cinemaRows.put(0, 'A');
         cinemaRows.put(1, 'B');
         cinemaRows.put(2, 'C');
-        //  Seat[][] seatArray = new Seat[cinemaRows.size()][cols];
         emptyTheatre = new Seat[cinemaRows.size()][COL_NUM];
         for (int i = 0; i < cinemaRows.size(); i++) {
             for (int j = 0; j < COL_NUM; j++) {
@@ -32,13 +30,51 @@ public class Cinema {
 
     }
 
+    private int findKey(char value){
+        OptionalInt any = cinemaRows
+                .entrySet()
+                .stream()
+                .filter(e -> Objects.equals(e.getValue(), value))
+                .mapToInt(Map.Entry::getKey)
+                .findAny();
+        return any.getAsInt();
+    }
 
-    public ArrayList<Seat> book(int seatToBook) {
+
+    public ArrayList<Seat> book(int seatsToBook) {
+        ArrayList<Seat> assignedSeats=new ArrayList<>();
+        final int allSeats = 15;
         final int MAX_BOOKABLE_SEATS = 3;
-        if (seatToBook > MAX_BOOKABLE_SEATS) throw new UnsupportedOperationException("You can book max 3 seats");
-        //ArrayList<Seat> bookedSeats=  checkNextAvailableSeat();
-        return checkNextAvailableSeat();
+        int updatedSeat=0;
+        if (seatsToBook > MAX_BOOKABLE_SEATS) throw new UnsupportedOperationException("You can book max 3 seats");
 
+        while(updatedSeat<seatsToBook) {
+           ArrayList<Seat> unassignedSeats = checkNextAvailableSeat();
+
+           if (allSeats - unassignedSeats.size() < seatsToBook)
+               throw new UnsupportedOperationException("No more seats available");
+           else {
+
+               Seat currentSeat = new Seat();
+                   updateSeat(unassignedSeats.get(0).getRow(), unassignedSeats.get(0).getSeatNumber());
+
+                   currentSeat.setRow(unassignedSeats.get(0).getRow());
+                   currentSeat.setSeatNumber(unassignedSeats.get(0).getSeatNumber());
+                   currentSeat.setBooked(true);
+
+                   assignedSeats.add(currentSeat);
+               updatedSeat++;
+
+           }
+       }
+
+        return assignedSeats ;
+    }
+
+    private void updateSeat(char row, int num){
+        Seat seatToUpdate =this.emptyTheatre[findKey(row)][num];
+        seatToUpdate.setBooked(true);
+        this.emptyTheatre[findKey(row)][num]=seatToUpdate;
     }
 
     public Seat[][] getEmptyTheatre() {
