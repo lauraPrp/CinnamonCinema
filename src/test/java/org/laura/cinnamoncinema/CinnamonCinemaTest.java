@@ -73,7 +73,7 @@ public class CinnamonCinemaTest {
 
     }
     @Test
-    public void generateRandomBookingTestUntilTheatreisFull() {
+    public void generateRandomBookingUntilTheatreisFullTest() {
         for(int i=0;i<5;i++) {
             int numberSeatsToBook = 3;
             seatsToBook = cinemaCinnamon.book(numberSeatsToBook);
