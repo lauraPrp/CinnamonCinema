@@ -28,7 +28,6 @@ public class Cinema {
         }
     }
 
-
     public ArrayList<Seat> book(int seatsToBook) {
         final int MAX_BOOKABLE_SEATS = 3;
 

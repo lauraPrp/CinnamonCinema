@@ -78,7 +78,6 @@ public class CinnamonCinemaTest {
             seatsToBook = cinemaCinnamon.book(3);
             assertEquals(3, seatsToBook.size());
         }
-
     }
 
     public int generateRandomBookingsNumber() {
