@@ -72,7 +72,7 @@ public class Cinema {
     }
 
 
-    public int getAlreadyBookedSeats() {
+    private int getAlreadyBookedSeats() {
         int bookedSeats = 0;
         for (int i = 0; i < cinemaRows.size(); i++) {
             for (int j = 0; j < COL_NUM; j++) {
