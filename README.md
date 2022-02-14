@@ -21,7 +21,7 @@ Tunning the class App/Main.java program starts and assignements are visible the 
 - When all seat are allocated a red "SOLD OUT" is printed
 - There might be not enough seats to allocatem, the programs alert with a red "Not enough seats available" message
 
-![image ](.....)
+![console screenshot ](https://github.com/lauraPrp/CinnamonCinema/blob/main/resources/consoleScreenShot.JPG?raw=true)
 
 *****************************************************************************************
 **Further improvements**
