@@ -22,10 +22,11 @@ public class Main {
             cinema.print();
             try {
                 number =generateRandomBookingsNumber();
+                System.out.println("seat requested: "+number);
                 cinema.book(number);
 
                 allocatableSeats -= number;
-
+                System.out.println("seat allocated: "+number);
             } catch (InputMismatchException ime) {
                 allocatableSeats += number;
                 break;
@@ -34,7 +35,7 @@ public class Main {
                 if (uoe.getMessage().equals("No more seats available"))
                     break;
             }
-            System.out.println("seat requested: "+number);
+
         }
         if (allocatableSeats == 0)
 
