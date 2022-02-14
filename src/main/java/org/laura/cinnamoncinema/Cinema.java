@@ -30,19 +30,22 @@ public class Cinema {
 
     public ArrayList<Seat> book(int seatsToBook) {
         final int MAX_BOOKABLE_SEATS = 3;
+        final String ERR_NO_MORE_SEATS_AVAILABLE = "No more seats available";
+        final String ERR_NOT_ENOUGH_SEATS_AVAILABLE = "Not enough seats available";
+        final String ERR_TOO_MANY_TICKET_REQUESTED = "You can book max " + MAX_BOOKABLE_SEATS + " seats";
 
         ArrayList<Seat> assignedSeats = new ArrayList<>();
         if (getAlreadyBookedSeats() == MAX_SEATS_NUMBER)
-            throw new UnsupportedOperationException("No more seats available");
+            throw new UnsupportedOperationException(ERR_NO_MORE_SEATS_AVAILABLE);
 
         if (seatsToBook > MAX_BOOKABLE_SEATS)
-            throw new UnsupportedOperationException("You can book max 3 seats");
+            throw new UnsupportedOperationException(ERR_TOO_MANY_TICKET_REQUESTED);
 
         int updatedSeat = 0;
         while (updatedSeat < seatsToBook) {
 
             if (MAX_SEATS_NUMBER - getAlreadyBookedSeats() < seatsToBook - updatedSeat)
-                throw new UnsupportedOperationException("Not enough seats available");
+                throw new UnsupportedOperationException(ERR_NOT_ENOUGH_SEATS_AVAILABLE);
             else {
                 Seat currentSeat = checkFirstAvailableSeat();
                 currentSeat.setBooked(true);
@@ -84,13 +87,26 @@ public class Cinema {
         return bookedSeats;
     }
 
-    private int findRowNumber(char value) {
+
+
+    private int findRowNumber(char value) throws IllegalStateException {
+        final int ERROR_IN_FINDING_ROW_NUMBER = 9;
         OptionalInt any = cinemaRows
                 .entrySet()
                 .stream()
                 .filter(e -> Objects.equals(e.getValue(), value))
                 .mapToInt(Map.Entry::getKey)
                 .findAny();
-        return any.getAsInt();
+        try {
+            if (any.isPresent()) {
+                return any.getAsInt();
+            }
+        } catch (IllegalStateException ise) {
+            ise.printStackTrace();
+        }
+        // this should never happen, cinemaRows is never empty
+        return ERROR_IN_FINDING_ROW_NUMBER;
     }
+
 }
+
