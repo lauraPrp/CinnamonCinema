@@ -107,6 +107,34 @@ public class Cinema {
         // this should never happen, cinemaRows is never empty
         return ERROR_IN_FINDING_ROW_NUMBER;
     }
+    public void print() {
+        final String ANSI_COLOUR_YELLOW = "\u001B[33m";
+        final String ANSI_COLOUR_PURPLE = "\u001B[35m";
+        final String ANSI_COLOUR_RED = "\u001B[31m";
+        final String ASSIGNED_SEAT = "A";
+        final String UNASSIGNED_SEAT = "U";
+        Seat[][] seats = allSeats;
+        for (int i = 0; i < seats.length; i++) { //rows
+            if(i==0){
+                System.out.print( ANSI_COLOUR_RED+"   1  2  3  4  5\na");
+            }else if(i==1)
+                System.out.print( "b");
+            else if(i==2)
+                System.out.print( "c");
+            for (int j = 0; j < seats[i].length; j++) { //cols
 
+                if (seats[i][j].isBooked()) {
+                    System.out.print(ANSI_COLOUR_YELLOW + "  " +
+                            ASSIGNED_SEAT +
+                            ANSI_COLOUR_RED);
+                } else {
+                    System.out.print(ANSI_COLOUR_PURPLE + "  " +
+                            UNASSIGNED_SEAT +
+                            ANSI_COLOUR_RED);
+                }
+            }
+            System.out.println();
+        }
+    }
 }
 
